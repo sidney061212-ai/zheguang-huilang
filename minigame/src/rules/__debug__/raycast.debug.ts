@@ -13,6 +13,8 @@ function makeLevel(overrides: Partial<LevelConfig>): LevelConfig {
     id: "debug-raycast",
     name: "Debug Raycast",
     hint: "",
+    maxDistance: 600,
+    maxBounces: 8,
     lightSource: {
       id: "source-debug",
       position: { x: 0, y: 0 },
@@ -95,9 +97,10 @@ const cases: DebugCase[] = [
             position: { x: 0, y: 0 },
             direction: { x: 1, y: 0 },
             color: "white",
-            intensity: 0.2,
+            intensity: 1,
             enabled: true
           },
+          maxDistance: 120,
           targets: [
             {
               id: "target-too-far",
@@ -229,9 +232,10 @@ const cases: DebugCase[] = [
             position: { x: 0, y: 0 },
             direction: { x: 1, y: 0 },
             color: "white",
-            intensity: 0.2,
+            intensity: 1,
             enabled: true
           },
+          maxDistance: 120,
           mirrors: [
             {
               id: "mirror-spend-distance",

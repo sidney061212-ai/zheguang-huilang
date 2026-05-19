@@ -18,6 +18,8 @@ export class PrismSplitSystem {
     const baseRay = {
       origin: ray.origin,
       intensity: ray.intensity * 0.92,
+      remainingDistance: ray.remainingDistance,
+      depth: ray.depth + 1,
       hasSplit: true,
       splitHistory,
       sourceId: ray.id

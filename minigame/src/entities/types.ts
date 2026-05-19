@@ -13,6 +13,8 @@ export type Ray = {
   direction: Vector2;
   color: RayColor;
   intensity: number;
+  remainingDistance: number;
+  depth: number;
   hasSplit: boolean;
   splitHistory: EntityId[];
   sourceId: EntityId;
@@ -67,5 +69,7 @@ export type RaySegment = {
   color: RayColor;
   intensityStart: number;
   intensityEnd: number;
+  remainingStart: number;
+  remainingEnd: number;
   sourceRayId: EntityId;
 };

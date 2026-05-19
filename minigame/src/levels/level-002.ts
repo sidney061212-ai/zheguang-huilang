@@ -3,7 +3,9 @@ import type { LevelConfig } from "./LevelConfig";
 export const level002: LevelConfig = {
   id: "level-002",
   name: "第二关：镜面反射",
-  hint: "旋转镜子，让光线转向目标。",
+  hint: "光线先向右，镜子把它折向上方目标。",
+  maxDistance: 520,
+  maxBounces: 4,
   lightSource: {
     id: "source-002",
     position: { x: 48, y: 360 },
@@ -16,7 +18,7 @@ export const level002: LevelConfig = {
     {
       id: "mirror-001",
       position: { x: 180, y: 360 },
-      rotation: -0.75,
+      rotation: -Math.PI / 4,
       length: 90,
       enabled: true,
       movable: true
@@ -26,9 +28,9 @@ export const level002: LevelConfig = {
   targets: [
     {
       id: "target-002",
-      position: { x: 305, y: 220 },
+      position: { x: 180, y: 220 },
       radius: 22,
-      acceptedColors: ["white", "red", "green", "blue"],
+      acceptedColors: ["white"],
       hit: false
     }
   ],

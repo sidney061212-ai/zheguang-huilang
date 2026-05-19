@@ -4,6 +4,8 @@ export type LevelConfig = {
   id: string;
   name: string;
   hint: string;
+  maxDistance: number;
+  maxBounces: number;
   lightSource: LightSource;
   mirrors: Mirror[];
   prisms: Prism[];
