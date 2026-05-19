@@ -1,12 +1,12 @@
 # v0.1 Tasks
 
 - [x] Create spec files.
-- [ ] Add raycast debug cases.
-- [ ] Implement real raycast and reflection.
-- [ ] Add playable level data.
-- [ ] Implement local progress save.
-- [ ] Implement mirror input.
-- [ ] Implement Canvas rendering.
-- [ ] Integrate Home / LevelSelect / Game / Victory flow.
-- [ ] Run typecheck and debug validation.
+- [x] Add raycast debug cases.
+- [x] Implement real raycast and reflection.
+- [x] Add playable level data.
+- [x] Implement local progress save.
+- [x] Implement mirror input.
+- [x] Implement Canvas rendering.
+- [x] Integrate Home / LevelSelect / Game / Victory flow.
+- [x] Run typecheck and debug validation.
 - [ ] Push feature branch.
