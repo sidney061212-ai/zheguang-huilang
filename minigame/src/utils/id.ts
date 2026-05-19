@@ -1,0 +1,11 @@
+let nextId = 1;
+
+export function createId(prefix: string): string {
+  const id = `${prefix}-${nextId}`;
+  nextId += 1;
+  return id;
+}
+
+export function resetIdCounterForTests(): void {
+  nextId = 1;
+}

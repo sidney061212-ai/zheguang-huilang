@@ -1,0 +1,14 @@
+{
+  "appid": "touristappid",
+  "projectname": "Prism Lab",
+  "compileType": "game",
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "postcss": false,
+    "minified": true,
+    "newFeature": true
+  },
+  "condition": {}
+}
