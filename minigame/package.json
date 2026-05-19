@@ -2,8 +2,8 @@
   "name": "prism-lab-minigame",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "debug:raycast": "out=$(mktemp -d) && trap 'rm -rf \"$out\"' EXIT && tsc --noEmit false --outDir \"$out\" --rootDir src --module CommonJS --moduleResolution node --target ES2020 --lib ES2020,DOM src/rules/__debug__/raycast.debug.ts && node \"$out/rules/__debug__/raycast.debug.js\"",
     "typecheck": "tsc --noEmit"
   },

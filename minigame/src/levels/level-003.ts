@@ -2,13 +2,13 @@ import type { LevelConfig } from "./LevelConfig";
 
 export const level003: LevelConfig = {
   id: "level-003",
-  name: "第三关：避开墙体",
-  hint: "直线被墙挡住，镜子把光线折向上方目标。",
-  maxDistance: 560,
+  name: "第三关：差一点",
+  hint: "光程有限，过长路线会耗尽；找到更短的反射路径。",
+  maxDistance: 430,
   maxBounces: 5,
   lightSource: {
     id: "source-003",
-    position: { x: 48, y: 300 },
+    position: { x: 48, y: 430 },
     direction: { x: 1, y: 0 },
     color: "white",
     intensity: 1,
@@ -17,9 +17,9 @@ export const level003: LevelConfig = {
   mirrors: [
     {
       id: "mirror-003",
-      position: { x: 170, y: 300 },
+      position: { x: 210, y: 430 },
       rotation: -Math.PI / 4,
-      length: 84,
+      length: 90,
       enabled: true,
       movable: true
     }
@@ -28,7 +28,7 @@ export const level003: LevelConfig = {
   targets: [
     {
       id: "target-003",
-      position: { x: 170, y: 160 },
+      position: { x: 210, y: 235 },
       radius: 22,
       acceptedColors: ["white"],
       hit: false
@@ -37,14 +37,14 @@ export const level003: LevelConfig = {
   walls: [
     {
       id: "wall-001",
-      position: { x: 260, y: 300 },
-      width: 44,
-      height: 160,
+      position: { x: 120, y: 240 },
+      width: 52,
+      height: 130,
       enabled: true
     }
   ],
   acceptance: {
-    expectedConcept: "用镜子绕过墙体",
+    expectedConcept: "光程按实际路径长度衰减",
     hasDeterministicSolution: true
   }
 };

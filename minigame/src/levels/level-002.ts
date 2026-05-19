@@ -2,13 +2,13 @@ import type { LevelConfig } from "./LevelConfig";
 
 export const level002: LevelConfig = {
   id: "level-002",
-  name: "第二关：镜面反射",
-  hint: "光线先向右，镜子把它折向上方目标。",
-  maxDistance: 520,
-  maxBounces: 4,
+  name: "第二关：绕开障碍",
+  hint: "直线被墙挡住，先用镜子把光折到上方再命中目标。",
+  maxDistance: 560,
+  maxBounces: 5,
   lightSource: {
     id: "source-002",
-    position: { x: 48, y: 360 },
+    position: { x: 48, y: 300 },
     direction: { x: 1, y: 0 },
     color: "white",
     intensity: 1,
@@ -16,10 +16,10 @@ export const level002: LevelConfig = {
   },
   mirrors: [
     {
-      id: "mirror-001",
-      position: { x: 180, y: 360 },
+      id: "mirror-002",
+      position: { x: 170, y: 300 },
       rotation: -Math.PI / 4,
-      length: 90,
+      length: 84,
       enabled: true,
       movable: true
     }
@@ -28,15 +28,23 @@ export const level002: LevelConfig = {
   targets: [
     {
       id: "target-002",
-      position: { x: 180, y: 220 },
+      position: { x: 170, y: 160 },
       radius: 22,
       acceptedColors: ["white"],
       hit: false
     }
   ],
-  walls: [],
+  walls: [
+    {
+      id: "wall-002",
+      position: { x: 250, y: 270 },
+      width: 48,
+      height: 170,
+      enabled: true
+    }
+  ],
   acceptance: {
-    expectedConcept: "镜子反射",
+    expectedConcept: "用镜子绕过墙体",
     hasDeterministicSolution: true
   }
 };
