@@ -4,6 +4,7 @@ import { levels } from "../levels";
 import type { ProgressRepository } from "../platform/ProgressRepository";
 import type { CanvasRenderer } from "../renderer/CanvasRenderer";
 import type { RenderButton } from "../renderer/types";
+import type { ViewportLayout } from "../utils/layout";
 import type { Scene } from "./Scene";
 
 export class LevelSelectScene implements Scene {
@@ -12,6 +13,7 @@ export class LevelSelectScene implements Scene {
   constructor(
     private readonly progressRepository: ProgressRepository,
     private readonly setButtons: (buttons: readonly InputButtonTarget[]) => void,
+    private readonly getLayout: () => ViewportLayout,
     private readonly startLevel: (index: number) => void,
     private readonly backHome: () => void
   ) {}
@@ -36,14 +38,27 @@ export class LevelSelectScene implements Scene {
   }
 
   private createRenderButtons(): RenderButton[] {
+    const layout = this.getLayout();
+    const topButtonHeight = Math.max(46, Math.round(layout.topBar.height * 0.72));
+    const topButtonWidth = Math.min(176, Math.max(132, layout.topBar.width * 0.28));
+    const topButtonY = layout.topBar.y + (layout.topBar.height - topButtonHeight) / 2;
+
+    const rowWidth = Math.max(220, layout.playArea.width - Math.max(20, layout.playArea.width * 0.08) * 2);
+    const rowHeight = Math.max(56, Math.min(76, Math.round(layout.playArea.height * 0.105)));
+    const rowX = layout.centerX - rowWidth / 2;
+    const maxGapBudget = layout.playArea.height - rowHeight * levels.length - 30;
+    const rowGap = levels.length > 1 ? Math.max(10, Math.min(24, maxGapBudget / (levels.length - 1))) : 0;
+    const contentHeight = rowHeight * levels.length + rowGap * Math.max(0, levels.length - 1);
+    const startY = layout.playArea.y + Math.max(14, (layout.playArea.height - contentHeight) / 2);
+
     const buttons: RenderButton[] = [
       {
         id: "level-select:back",
         label: "返回首页",
-        x: 42,
-        y: 48,
-        width: 170,
-        height: 56
+        x: layout.topBar.x,
+        y: topButtonY,
+        width: topButtonWidth,
+        height: topButtonHeight
       }
     ];
 
@@ -53,10 +68,10 @@ export class LevelSelectScene implements Scene {
       buttons.push({
         id: `level-select:${index}`,
         label: unlocked ? `${index + 1}. ${level.name}` : `${index + 1}. 未解锁`,
-        x: 95,
-        y: 420 + index * 92,
-        width: 560,
-        height: 70,
+        x: rowX,
+        y: startY + index * (rowHeight + rowGap),
+        width: rowWidth,
+        height: rowHeight,
         enabled: unlocked
       });
     }

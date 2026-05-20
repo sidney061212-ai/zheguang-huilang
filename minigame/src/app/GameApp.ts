@@ -11,12 +11,14 @@ import { HomeScene } from "../scenes/HomeScene";
 import { LevelSelectScene } from "../scenes/LevelSelectScene";
 import { SceneManager } from "../scenes/SceneManager";
 import { levels } from "../levels";
+import { createViewportLayout } from "../utils/layout";
 
 export class GameApp {
   private readonly eventBus = new EventBus();
   private readonly input = new InputManager();
   private readonly sceneManager = new SceneManager();
   private readonly debug = new Debug();
+  private readonly getLayout: () => ReturnType<typeof createViewportLayout>;
   private readonly progressRepository: ProgressRepository;
   private readonly renderer: CanvasRenderer;
   private readonly loop: GameLoop;
@@ -25,14 +27,18 @@ export class GameApp {
 
   constructor(private readonly platform: PlatformAdapter) {
     const canvas = platform.createCanvas();
-    canvas.width = 750;
-    canvas.height = 1334;
     const viewport = platform.getViewportSize();
+    const canvasWidth = Math.max(360, Math.round(viewport.width));
+    const canvasHeight = Math.max(640, Math.round(viewport.height));
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    const scale = Math.min(viewport.width / canvas.width, viewport.height / canvas.height);
     this.input.setCoordinateTransform({
-      scale: Math.min(viewport.width / canvas.width, viewport.height / canvas.height),
-      offsetX: Math.max(0, (viewport.width - canvas.width * Math.min(viewport.width / canvas.width, viewport.height / canvas.height)) / 2),
-      offsetY: Math.max(0, (viewport.height - canvas.height * Math.min(viewport.width / canvas.width, viewport.height / canvas.height)) / 2)
+      scale,
+      offsetX: Math.max(0, (viewport.width - canvas.width * scale) / 2),
+      offsetY: Math.max(0, (viewport.height - canvas.height * scale) / 2)
     });
+    this.getLayout = () => createViewportLayout(canvas.width, canvas.height);
     this.renderer = new CanvasRenderer(canvas);
     this.progressRepository = new ProgressRepository(platform.createStorage());
     this.audio = new AudioManager(this.eventBus);
@@ -40,6 +46,7 @@ export class GameApp {
       this.eventBus,
       this.input,
       this.progressRepository,
+      this.getLayout,
       () => this.sceneManager.switchTo("level-select"),
       () => this.nextLevel()
     );
@@ -58,6 +65,7 @@ export class GameApp {
       new HomeScene(
         this.progressRepository,
         (buttons) => this.input.setButtons(buttons),
+        this.getLayout,
         () => this.sceneManager.switchTo("level-select"),
         () => this.startLatestUnlockedLevel()
       )
@@ -66,6 +74,7 @@ export class GameApp {
       new LevelSelectScene(
         this.progressRepository,
         (buttons) => this.input.setButtons(buttons),
+        this.getLayout,
         (index) => this.startLevel(index),
         () => this.sceneManager.switchTo("home")
       )

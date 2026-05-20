@@ -12,6 +12,7 @@ import { RaycastSystem } from "../rules/RaycastSystem";
 import type { RaycastResult } from "../rules/RaycastSystem";
 import { WinConditionSystem } from "../rules/WinConditionSystem";
 import { clamp } from "../utils/math";
+import { clampPointToRect, type ViewportLayout } from "../utils/layout";
 import type { Scene } from "./Scene";
 
 export class GameScene implements Scene {
@@ -30,6 +31,7 @@ export class GameScene implements Scene {
     private readonly eventBus: EventBus,
     private readonly input: InputManager,
     private readonly progressRepository: ProgressRepository,
+    private readonly getLayout: () => ViewportLayout,
     private readonly backToLevelSelect: () => void,
     private readonly goToNextLevel: () => void
   ) {
@@ -107,10 +109,8 @@ export class GameScene implements Scene {
     if (action.type === "mirror:drag") {
       const mirror = this.findMirror(action.mirrorId);
       if (!mirror?.movable) return;
-      mirror.position = {
-        x: clamp(action.nextPosition.x, 48, 702),
-        y: clamp(action.nextPosition.y, 150, 1130)
-      };
+      const dragPadding = Math.max(18, mirror.length * 0.5 + 6);
+      mirror.position = clampPointToRect(action.nextPosition, this.getLayout().playArea, dragPadding);
       this.recalculate();
       this.syncInputTargets();
       return;
@@ -169,45 +169,51 @@ export class GameScene implements Scene {
   }
 
   private createTopButtons(): RenderButton[] {
+    const layout = this.getLayout();
+    const buttonHeight = Math.max(46, Math.round(layout.topBar.height * 0.72));
+    const buttonWidth = Math.min(164, Math.max(124, layout.topBar.width * 0.24));
+    const y = layout.topBar.y + (layout.topBar.height - buttonHeight) / 2;
     return [
       {
         id: "game:back",
         label: "返回",
-        x: 42,
-        y: 118,
-        width: 140,
-        height: 56
+        x: layout.topBar.x,
+        y,
+        width: buttonWidth,
+        height: buttonHeight
       },
       {
         id: "game:reset",
         label: "重置",
-        x: 568,
-        y: 118,
-        width: 140,
-        height: 56
+        x: layout.topBar.x + layout.topBar.width - buttonWidth,
+        y,
+        width: buttonWidth,
+        height: buttonHeight
       }
     ];
   }
 
   private createNextButton(): RenderButton {
+    const rect = this.getVictoryButtonRects().next;
     return {
       id: "game:next",
       label: this.currentLevelIndex >= levels.length - 1 ? "返回选关" : "下一关",
-      x: 220,
-      y: 440,
-      width: 310,
-      height: 64
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height
     };
   }
 
   private createReplayButton(): RenderButton {
+    const rect = this.getVictoryButtonRects().replay;
     return {
       id: "game:replay",
       label: "重玩本关",
-      x: 220,
-      y: 520,
-      width: 310,
-      height: 64
+      x: rect.x,
+      y: rect.y,
+      width: rect.width,
+      height: rect.height
     };
   }
 
@@ -228,6 +234,21 @@ export class GameScene implements Scene {
 
   private findMirror(mirrorId: EntityId) {
     return this.currentLevel.mirrors.find((mirror) => mirror.id === mirrorId) ?? null;
+  }
+
+  private getVictoryButtonRects(): { next: { x: number; y: number; width: number; height: number }; replay: { x: number; y: number; width: number; height: number } } {
+    const layout = this.getLayout();
+    const width = Math.min(330, Math.max(224, layout.dialog.width * 0.72));
+    const height = Math.max(52, Math.round(layout.dialog.height * 0.24));
+    const gap = Math.max(10, Math.round(height * 0.2));
+    const x = layout.centerX - width / 2;
+    const topLimit = layout.dialog.y + Math.max(88, layout.dialog.height * 0.36);
+    const bottomAlignedY = layout.dialog.y + layout.dialog.height - (height * 2 + gap) - 16;
+    const y = Math.max(topLimit, bottomAlignedY);
+    return {
+      next: { x, y, width, height },
+      replay: { x, y: y + height + gap, width, height }
+    };
   }
 }
 
