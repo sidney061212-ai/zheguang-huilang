@@ -2,6 +2,8 @@ import type { Prism, Ray } from "../entities/types";
 import { createId } from "../utils/id";
 
 export class PrismSplitSystem {
+  // v0.1 placeholder prototype only. This is intentionally not wired into
+  // the playable raycast pipeline until prism gameplay is scheduled.
   split(ray: Ray, prism: Prism): Ray[] {
     if (!prism.enabled) return [ray];
 

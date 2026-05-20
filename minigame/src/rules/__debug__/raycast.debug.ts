@@ -88,7 +88,7 @@ const cases: DebugCase[] = [
     }
   },
   {
-    name: "distance lost",
+    name: "distance exhausted",
     run: () => {
       const result = simulate(
         makeLevel({
@@ -114,9 +114,9 @@ const cases: DebugCase[] = [
       );
 
       assertEqual(result.hitTargetIds.length, 0, "far target is not hit");
-      assertEqual(result.segments.length, 1, "lost ray emits one terminal segment");
-      assertPoint(result.segments[0].to, { x: 120, y: 0 }, "lost ray ends at remaining distance");
-      assertClose(result.segments[0].intensityEnd, 0, "lost ray spends all intensity");
+      assertEqual(result.segments.length, 1, "exhausted ray emits one terminal segment");
+      assertPoint(result.segments[0].to, { x: 120, y: 0 }, "exhausted ray ends at remaining distance");
+      assertClose(result.segments[0].intensityEnd, 0, "exhausted ray spends all intensity");
     }
   },
   {
@@ -267,9 +267,16 @@ const cases: DebugCase[] = [
   }
 ];
 
+assertEqual(cases.length, 6, "debug:raycast must keep six required cases");
+
 for (const debugCase of cases) {
-  debugCase.run();
-  console.log(`ok - ${debugCase.name}`);
+  try {
+    debugCase.run();
+    console.log(`PASS ${debugCase.name}`);
+  } catch (error) {
+    console.error(`FAIL ${debugCase.name}`);
+    throw error;
+  }
 }
 
-console.log(`raycast debug: ${cases.length}/${cases.length} passed`);
+console.log(`PASS raycast debug: ${cases.length}/${cases.length} passed`);

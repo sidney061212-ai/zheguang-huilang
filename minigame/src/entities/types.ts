@@ -1,5 +1,7 @@
 export type EntityId = string;
 
+// v0.1 playable path uses white ray only.
+// red/green/blue are reserved for future prism expansion.
 export type RayColor = "white" | "red" | "green" | "blue";
 
 export type Vector2 = {
@@ -15,7 +17,9 @@ export type Ray = {
   intensity: number;
   remainingDistance: number;
   depth: number;
+  // Reserved for v0.2 prism split pipeline.
   hasSplit: boolean;
+  // Reserved for v0.2 prism split pipeline.
   splitHistory: EntityId[];
   sourceId: EntityId;
 };
@@ -43,6 +47,7 @@ export type Prism = {
   position: Vector2;
   rotation: number;
   size: number;
+  // Prism exists as placeholder data in v0.1 and is not in clear path logic.
   enabled: boolean;
 };
 

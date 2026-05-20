@@ -26,3 +26,43 @@
 - Modified files: none; validation only.
 - Test result: local Node check reported `hit-target` for levels 001-005.
 - Remaining: manual phone/device tuning after import.
+
+- Completed: Agent A/B/C/E review done and merged into fix plan (layout, scope boundary, visual refresh, WeChat chain checks).
+- Modified files: `.specs/v0.1-playable-foundation/{requirements.md,design.md,tasks.md,decisions.md,test-plan.md}`.
+- Notes: v0.1 boundary explicitly kept mirror-only clear path; prism/concentrator marked placeholder-only.
+- Remaining: run install/typecheck/build/debug command set and record outputs.
+
+- Completed: responsive layout helper and scene button/bounds refactor.
+- Modified files: `minigame/src/utils/layout.ts`, `minigame/src/app/GameApp.ts`, `minigame/src/scenes/{GameScene.ts,HomeScene.ts,LevelSelectScene.ts}`.
+- Notes: removed hardcoded drag clamp and scene button absolute coordinates, now derived from viewport layout rects.
+- Remaining: run regression commands and adjust if any type/build issues.
+
+- Completed: Canvas v0.1 visual refresh (lighter background, play area card, cleaner wall/ray/target readability).
+- Modified files: `minigame/src/renderer/{CanvasRenderer.ts,RayRenderer.ts,MirrorRenderer.ts,TargetRenderer.ts,PrismRenderer.ts}`, `minigame/src/ui/{Button.ts,VictoryDialog.ts}`.
+- Notes: no external images or heavy effects; kept 2D canvas lightweight.
+- Remaining: verify script and build outputs.
+
+- Completed: scope safety comments added for placeholder prism pipeline.
+- Modified files: `minigame/src/entities/types.ts`, `minigame/src/rules/{RaycastSystem.ts,PrismSplitSystem.ts}`, `minigame/src/rules/__debug__/raycast.debug.ts`.
+- Notes: debug now prints explicit `PASS ...` lines and guards required case count.
+- Remaining: final command validation and branch push.
+
+- Completed: command validation for merge-readiness fix round.
+- Commands:
+  - `pnpm --dir minigame install` -> `Already up to date`.
+  - `pnpm --dir minigame run typecheck` -> pass.
+  - `pnpm --dir minigame run build` -> pass.
+  - `pnpm --dir minigame run debug:raycast` -> pass with six required `PASS` cases.
+- Artifacts: `minigame/dist/app/index.js` confirmed exists after build.
+
+- Completed: WeChat mini game chain verification.
+- Checked files: `minigame/game.js`, `minigame/game.json`, `minigame/project.config.json`, `minigame/src/app/index.ts`, `minigame/src/app/GameApp.ts`, `minigame/src/platform/WechatPlatformAdapter.ts`.
+- Import steps (WeChat DevTools):
+  1. Run `pnpm --dir minigame run build`.
+  2. Open WeChat DevTools and choose Mini Game project.
+  3. Import folder: `/Users/sidney/Documents/game/minigame`.
+  4. Confirm entry from `game.js -> dist/app/index.js`.
+- Known limits:
+  - Entry depends on prebuilt `dist/*` files.
+  - `appid` is `touristappid` and should be replaced for release.
+  - Touch pipeline currently listens to `start/move/end` only in platform adapter.

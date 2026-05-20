@@ -168,6 +168,8 @@ export class RaycastSystem {
       }
     }
 
+    // v0.1 note: prism / concentrator are placeholders and intentionally
+    // excluded from hit detection in the playable foundation branch.
     return nearest;
   }
 
