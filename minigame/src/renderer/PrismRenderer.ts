@@ -1,6 +1,7 @@
 import type { Prism } from "../entities/types";
 
 export class PrismRenderer {
+  // v0.1 placeholder visual only; prism logic is not in playable path yet.
   render(context: CanvasRenderingContext2D, prism: Prism): void {
     if (!prism.enabled) return;
 
@@ -13,10 +14,10 @@ export class PrismRenderer {
     context.lineTo(prism.size, height / 2);
     context.lineTo(-prism.size, height / 2);
     context.closePath();
-    context.fillStyle = "rgba(176, 232, 255, 0.42)";
+    context.fillStyle = "rgba(176, 232, 255, 0.3)";
     context.fill();
     context.strokeStyle = "#74aee8";
-    context.lineWidth = 3;
+    context.lineWidth = 2.5;
     context.stroke();
 
     context.beginPath();

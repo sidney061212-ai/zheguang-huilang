@@ -22,15 +22,15 @@ export class VictoryDialog extends Panel {
   static render(context: CanvasRenderingContext2D, options: VictoryDialogRenderOptions): void {
     const height = options.secondaryButton ? 250 : 198;
     context.save();
-    context.fillStyle = "rgba(13, 28, 48, 0.28)";
+    context.fillStyle = "rgba(13, 28, 48, 0.32)";
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
     context.beginPath();
-    context.roundRect(options.x, options.y, options.width, height, 16);
-    context.fillStyle = "rgba(255, 255, 255, 0.96)";
+    context.roundRect(options.x, options.y, options.width, height, 18);
+    context.fillStyle = "rgba(255, 255, 255, 0.97)";
     context.fill();
-    context.strokeStyle = "rgba(32, 56, 95, 0.12)";
-    context.lineWidth = 2;
+    context.strokeStyle = "rgba(115, 145, 176, 0.32)";
+    context.lineWidth = 1.8;
     context.stroke();
 
     context.fillStyle = "#20385f";

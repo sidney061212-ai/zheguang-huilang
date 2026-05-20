@@ -12,20 +12,20 @@ export class TargetRenderer {
     context.save();
     context.beginPath();
     context.arc(target.position.x, target.position.y, target.radius + 7, 0, Math.PI * 2);
-    context.fillStyle = hit ? "rgba(52, 199, 89, 0.18)" : "rgba(255, 255, 255, 0.7)";
+    context.fillStyle = hit ? "rgba(52, 199, 89, 0.2)" : "rgba(255, 255, 255, 0.78)";
     context.fill();
-    context.strokeStyle = hit ? "#34c759" : "#90a4b8";
-    context.lineWidth = 3;
+    context.strokeStyle = hit ? "#34c759" : "#8198ae";
+    context.lineWidth = 3.2;
     context.stroke();
 
     context.beginPath();
     context.arc(target.position.x, target.position.y, target.radius, 0, Math.PI * 2);
-    context.fillStyle = "#101b2d";
+    context.fillStyle = "#152234";
     context.fill();
 
     context.beginPath();
     context.arc(target.position.x, target.position.y, Math.max(6, target.radius - 8), 0, Math.PI * 2);
-    context.fillStyle = hit ? "#34c759" : "#ffffff";
+    context.fillStyle = hit ? "#34c759" : "#f8fbff";
     context.fill();
 
     this.renderAcceptedColors(context, target);
@@ -43,6 +43,10 @@ export class TargetRenderer {
     for (let index = 0; index < count; index += 1) {
       const color = target.acceptedColors[index];
       const x = startX + index * (swatchRadius * 2 + gap);
+      context.beginPath();
+      context.arc(x, y, swatchRadius + 2, 0, Math.PI * 2);
+      context.fillStyle = "rgba(255, 255, 255, 0.9)";
+      context.fill();
       context.beginPath();
       context.arc(x, y, swatchRadius, 0, Math.PI * 2);
       context.fillStyle = COLOR_SWATCHES[color];

@@ -1,17 +1,17 @@
 import type { RayColor, RaySegment } from "../entities/types";
 
 const RAY_STROKES: Record<RayColor, string> = {
-  white: "#f8fbff",
+  white: "#f1fbff",
   red: "#ff5c5c",
   green: "#34c759",
   blue: "#4d8dff"
 };
 
 const RAY_GLOWS: Record<RayColor, string> = {
-  white: "rgba(140, 210, 255, 0.38)",
-  red: "rgba(255, 92, 92, 0.28)",
-  green: "rgba(52, 199, 89, 0.28)",
-  blue: "rgba(77, 141, 255, 0.32)"
+  white: "rgba(140, 210, 255, 0.26)",
+  red: "rgba(255, 92, 92, 0.24)",
+  green: "rgba(52, 199, 89, 0.24)",
+  blue: "rgba(77, 141, 255, 0.28)"
 };
 
 export class RayRenderer {
@@ -24,7 +24,7 @@ export class RayRenderer {
       context.moveTo(segment.from.x, segment.from.y);
       context.lineTo(segment.to.x, segment.to.y);
       context.strokeStyle = RAY_GLOWS[segment.color];
-      context.lineWidth = 14;
+      context.lineWidth = 8;
       context.lineCap = "round";
       context.stroke();
 
@@ -32,10 +32,10 @@ export class RayRenderer {
       context.moveTo(segment.from.x, segment.from.y);
       context.lineTo(segment.to.x, segment.to.y);
       context.strokeStyle = RAY_STROKES[segment.color];
-      context.lineWidth = segment.color === "white" ? 4 : 5;
+      context.lineWidth = segment.color === "white" ? 3.6 : 4.4;
       context.lineCap = "round";
       context.shadowColor = RAY_GLOWS[segment.color];
-      context.shadowBlur = 10;
+      context.shadowBlur = 7;
       context.stroke();
       context.restore();
     }

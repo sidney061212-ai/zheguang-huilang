@@ -65,11 +65,11 @@ export class Button {
     context.save();
     context.globalAlpha = enabled ? 1 : 0.48;
     context.beginPath();
-    context.roundRect(state.x, state.y, state.width, state.height, 8);
-    context.fillStyle = state.pressed ? "#155fc4" : "#1d80ff";
+    context.roundRect(state.x, state.y, state.width, state.height, 10);
+    context.fillStyle = state.pressed ? "#1f79d9" : "#2a92ff";
     context.fill();
-    context.strokeStyle = "rgba(16, 43, 80, 0.18)";
-    context.lineWidth = 2;
+    context.strokeStyle = "rgba(255, 255, 255, 0.68)";
+    context.lineWidth = 1.6;
     context.stroke();
 
     context.fillStyle = "#ffffff";
