@@ -14,8 +14,10 @@ function ensureGameRoot(scene: Node | null) {
   let gameRoot = canvas.getChildByName('GameRoot');
   if (!gameRoot) {
     gameRoot = new Node('GameRoot');
+    gameRoot.layer = canvas.layer;
     gameRoot.parent = canvas;
   }
+  gameRoot.layer = canvas.layer;
 
   if (!gameRoot.getComponent(PrismGameController)) {
     gameRoot.addComponent(PrismGameController);

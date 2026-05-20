@@ -104,10 +104,12 @@ export class PrismGameController extends Component {
   private ensureChild(parent: Node, name: string): Node {
     const existing = parent.getChildByName(name);
     if (existing) {
+      existing.layer = parent.layer;
       return existing;
     }
 
     const node = new Node(name);
+    node.layer = parent.layer;
     node.parent = parent;
     return node;
   }

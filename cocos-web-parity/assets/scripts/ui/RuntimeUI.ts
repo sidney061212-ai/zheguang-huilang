@@ -195,8 +195,10 @@ export class RuntimeUI extends Component {
   private ensureNode(parent: Node, name: string, x: number, y: number, width: number, height: number): Node {
     const node = parent.getChildByName(name) ?? new Node(name);
     if (!node.parent) {
+      node.layer = parent.layer;
       node.parent = parent;
     }
+    node.layer = parent.layer;
 
     node.setPosition(x, y, 0);
     const transform = node.getComponent(UITransform) ?? node.addComponent(UITransform);
