@@ -1,11 +1,18 @@
 # v0.1 Test Plan
 
+## Command Checks
+
+- `pnpm --dir minigame install`
+- `pnpm --dir minigame run typecheck`
+- `pnpm --dir minigame run build`
+- `pnpm --dir minigame run debug:raycast`
+
 ## Debug Cases
 
-`debug:raycast` must cover:
+`debug:raycast` must print PASS lines for:
 
 - direct target hit
-- distance lost
+- distance exhausted
 - wall block
 - mirror reflection
 - nearest hit selection
@@ -25,6 +32,7 @@
 
 ## Boundary Checks
 
-- Search `wx` usage.
+- Search `wx` usage and keep it in `src/platform/*`.
 - Confirm no ads, login, payment, ranking, backend.
-- Confirm prism not required for v0.1.
+- Confirm prism/concentrator are placeholders and not required in v0.1 levels.
+- Confirm `game.js` points to `dist/app/index.js` after build.
