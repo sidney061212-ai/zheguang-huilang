@@ -1,0 +1,19 @@
+{
+  "name": "cocos-prism-lab",
+  "type": "3d",
+  "uuid": "943bb95a-364e-43f6-8708-389cbcbb7216",
+  "version": "3.8.0",
+  "creator": {
+    "version": "3.8.0"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:levels": "vitest run tests/light-simulator.test.ts -t \"validateAllLevels\"",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^3.2.4"
+  }
+}

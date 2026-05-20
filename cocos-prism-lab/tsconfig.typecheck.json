@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": false,
+    "skipLibCheck": true,
+    "types": ["vitest/globals"]
+  },
+  "include": [
+    "assets/scripts/core/**/*.ts",
+    "assets/scripts/levels/**/*.ts",
+    "assets/scripts/debug/**/*.ts",
+    "tests/**/*.ts"
+  ]
+}
