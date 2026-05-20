@@ -1,0 +1,16 @@
+{
+  "name": "cocos-web-parity",
+  "type": "3d",
+  "uuid": "f7618945-6747-42ae-86de-d2b6f05d3f4e",
+  "version": "3.8.0",
+  "creator": {
+    "version": "3.8.8"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+  },
+  "devDependencies": {
+    "@cocos/creator-types": "^3.8.7",
+    "typescript": "^5.6.3"
+  }
+}

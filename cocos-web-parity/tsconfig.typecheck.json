@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "types": [
+      "@cocos/creator-types/engine"
+    ]
+  },
+  "include": [
+    "assets/scripts/**/*.ts"
+  ]
+}
