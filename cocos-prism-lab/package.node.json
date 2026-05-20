@@ -1,0 +1,15 @@
+{
+  "name": "cocos-prism-lab-node",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:levels": "vitest run tests/light-simulator.test.ts -t \"validateAllLevels\"",
+    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^3.2.4"
+  }
+}

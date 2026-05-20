@@ -7,10 +7,10 @@
     "version": "3.8.0"
   },
   "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "validate:levels": "vitest run tests/light-simulator.test.ts -t \"validateAllLevels\"",
-    "typecheck": "tsc --noEmit -p tsconfig.typecheck.json"
+    "test": "node ./scripts/run-node-tooling.mjs test",
+    "test:watch": "node ./scripts/run-node-tooling.mjs test:watch",
+    "validate:levels": "node ./scripts/run-node-tooling.mjs validate:levels",
+    "typecheck": "node ./scripts/run-node-tooling.mjs typecheck"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
